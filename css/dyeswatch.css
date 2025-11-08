@@ -1,0 +1,38 @@
+body {
+    background-color: #212529; /* Example using a hexadecimal color code */
+    color: #dee2e6;
+}
+
+.dyemap {
+    border-spacing: 10px; border-collapse: separate;
+    color: #d9d7d7;
+    text-shadow: -1px -1px 0 #3c4248, 1px -1px 0 #3c4248, -1px 1px 0 #3c4248, 1px 1px 0 #3c4248;
+}
+
+td.swatch {
+    width: 100px;
+    height: 55px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#example_room {
+	position: fixed;
+	right: 20px;
+/*	top: 300px;
+	height: 83px;*/
+}
+
+.maincontent {
+    width: 50%;
+}
+
+/* tablet & desktop */
+
+@media (min-width: 1210px) {
+
+.maincontent {
+    width: 100%;
+}
+
+}

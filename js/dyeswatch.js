@@ -540,48 +540,36 @@ window.onload = function(){
         ]
     ]
 
-
-    const x_width = 39
-    const y_height = 33
-    const gap = 6
-
     function createMap(dyes){
     const dyemap = document.getElementById("dyemap");
 
     for (let i = 0; i < dyes.length; i++) {
         const newRow = document.createElement("tr");
 
-
         for (let x =0;x<dyes[i].length; x++){
 
             const newCell = document.createElement("td");
             newCell.style.backgroundImage = 'linear-gradient(to bottom right, '+dyes[i][x]["main_color"]+ ' 0%,'+dyes[i][x]["main_color"]+ ' 40%,'+dyes[i][x]["fade_color"]+ ' 60%,'+dyes[i][x]["fade_color"]+ ' 100%)';
-
-            newCell.style.width = "100px";
-            newCell.style.height = "55px";
-            newCell.style.textAlign = 'center'; 
-            newCell.style.fontWeight = 'bold';
+            newCell.setAttribute("class", "swatch");
             newCell.innerHTML = dyes[i][x]["name"];
-
-            newCell.onmouseover = function (){showImage("img/"+dyes[i][x]["img"])};
+            newCell.onmouseover = function (){showImage("img/"+dyes[i][x]["img"], dyes[i][x]["name"])};
             newCell.onmouseout = function (){hideImage()}; 
 
             newRow.append(newCell);
         }
-
-
             dyemap.append(newRow);
       };
     }
 
     createMap(dyes);
 
-    function showImage(imgSrc) {
+    function showImage(imgSrc,altText) {
         const elem = document.getElementById("example_room");
         const dyeImage = new Image();
         dyeImage.src = imgSrc;
         dyeImage.style.zIndex = "1";
         dyeImage.setAttribute("class", "img-fluid");
+        dyeImage.setAttribute("alt",altText)
         elem.appendChild(dyeImage);
     }
     function hideImage() {
