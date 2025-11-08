@@ -540,6 +540,10 @@ window.onload = function(){
         ]
     ]
 
+    function isMobileMediaQuery() {
+        return window.matchMedia("(max-width: 767px)").matches; // Example: mobile up to 767px width
+    }
+
     function createMap(dyes){
     const dyemap = document.getElementById("dyemap");
 
@@ -552,8 +556,14 @@ window.onload = function(){
             newCell.style.backgroundImage = 'linear-gradient(to bottom right, '+dyes[i][x]["main_color"]+ ' 0%,'+dyes[i][x]["main_color"]+ ' 40%,'+dyes[i][x]["fade_color"]+ ' 60%,'+dyes[i][x]["fade_color"]+ ' 100%)';
             newCell.setAttribute("class", "swatch");
             newCell.innerHTML = dyes[i][x]["name"];
-            newCell.onmouseover = function (){showImage("img/"+dyes[i][x]["img"], dyes[i][x]["name"])};
-            newCell.onmouseout = function (){hideImage()}; 
+
+            if (isMobileMediaQuery()) {
+                newCell.onclick = function (){clickImage("img/"+dyes[i][x]["img"], dyes[i][x]["name"])};
+
+            } else {
+                newCell.onmouseover = function (){showImage("img/"+dyes[i][x]["img"], dyes[i][x]["name"])};
+                newCell.onmouseout = function (){hideImage()}; 
+            }
 
             newRow.append(newCell);
         }
@@ -563,16 +573,27 @@ window.onload = function(){
 
     createMap(dyes);
 
-    function isMobileMediaQuery() {
-        return window.matchMedia("(max-width: 767px)").matches; // Example: mobile up to 767px width
-    }
 
 
     function showImage(imgSrc,altText) {
+        const elem = document.getElementById("example_room");
+        const dyeImage = new Image();
+        dyeImage.src = imgSrc;
+        dyeImage.style.zIndex = "1";
+        dyeImage.setAttribute("class", "img-fluid");
+        dyeImage.setAttribute("alt",altText)
+        elem.appendChild(dyeImage);
+    }
 
-        if (isMobileMediaQuery()) {
-            console.log("Mobile device detected via Media Query.");
+    function hideImage() {
+        const elem = document.getElementById("example_room");
+        while (elem.childElementCount > 0) {
+            elem.removeChild(elem.lastChild);
+        }
+    }
 
+
+     function clickImage(imgSrc,altText) {
             var modal = document.getElementById("example_modal");
             var captionText = document.getElementById("caption");
             var modalImg = document.getElementById("example");
@@ -589,25 +610,5 @@ window.onload = function(){
               modal.style.display = "none";
             }
 
-
-        } else {
-            console.log("Desktop device detected via Media Query.");
-            const elem = document.getElementById("example_room");
-            const dyeImage = new Image();
-            dyeImage.src = imgSrc;
-            dyeImage.style.zIndex = "1";
-            dyeImage.setAttribute("class", "img-fluid");
-            dyeImage.setAttribute("alt",altText)
-            elem.appendChild(dyeImage);
-
-
         }
-    }
-    function hideImage() {
-        const elem = document.getElementById("example_room");
-        while (elem.childElementCount > 0) {
-            elem.removeChild(elem.lastChild);
-        }
-    }
-
 }
