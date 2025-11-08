@@ -563,14 +563,45 @@ window.onload = function(){
 
     createMap(dyes);
 
+    function isMobileMediaQuery() {
+        return window.matchMedia("(max-width: 767px)").matches; // Example: mobile up to 767px width
+    }
+
+
     function showImage(imgSrc,altText) {
-        const elem = document.getElementById("example_room");
-        const dyeImage = new Image();
-        dyeImage.src = imgSrc;
-        dyeImage.style.zIndex = "1";
-        dyeImage.setAttribute("class", "img-fluid");
-        dyeImage.setAttribute("alt",altText)
-        elem.appendChild(dyeImage);
+
+        if (isMobileMediaQuery()) {
+            console.log("Mobile device detected via Media Query.");
+
+            var modal = document.getElementById("example_modal");
+            var captionText = document.getElementById("caption");
+            var modalImg = document.getElementById("example");
+
+            modal.style.display = "block";
+            modalImg.src = imgSrc;
+            captionText.innerHTML = altText;
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() { 
+              modal.style.display = "none";
+            }
+
+
+        } else {
+            console.log("Desktop device detected via Media Query.");
+            const elem = document.getElementById("example_room");
+            const dyeImage = new Image();
+            dyeImage.src = imgSrc;
+            dyeImage.style.zIndex = "1";
+            dyeImage.setAttribute("class", "img-fluid");
+            dyeImage.setAttribute("alt",altText)
+            elem.appendChild(dyeImage);
+
+
+        }
     }
     function hideImage() {
         const elem = document.getElementById("example_room");
