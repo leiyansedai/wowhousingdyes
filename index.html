@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    <style>
+
+        .readable_text {
+            color: #d9d7d7;
+            text-shadow: -1px -1px 0 #3c4248, 1px -1px 0 #3c4248, -1px 1px 0 #3c4248, 1px 1px 0 #3c4248;
+        }
+
+        body {
+            background-color: #212529; /* Example using a hexadecimal color code */
+            color: #dee2e6;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+    <h1>Dye Swatch Room Examples</h1>
+    <p>Hover over the dye swatch to see a screenshot of an example room that uses that dye.<br>Room screenshots are from Ardastar (Architects of Azeroth discord), code and webpage from Leiyan (Architects of Azeroth discord).</p>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <table id="dyemap"  class="readable_text" style="border-spacing: 10px; border-collapse: separate;">
+            </table>
+    </div>
+    <div class="col-7" id="example_room"></div>
+    <div class="col-1"></div>
+</div>
+
+    <script src="js/dyeswatch.js"></script>
+</body>
+</html>
